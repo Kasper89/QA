@@ -276,11 +276,30 @@ public class MainActivity extends AppCompatActivity {
                     default:
                         break;
                 }
-                String stres = tv.getText().toString()+"\n= "+res;
-                //stres = stres+type;
-                tv.setText(stres);
-                is_res = true;
-                type = "";
+                if (res % 1 == 0) {
+                    long ires = Math.round(res);
+                    if (ires==777){
+                        try {
+                            throw new Exception("Пасхалка)))");
+                        } catch (Exception e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                    else {
+                        String stres = tv.getText().toString()+"\n= "+ires;
+                        //stres = stres+type;
+                        tv.setText(stres);
+                        is_res = true;
+                        type = "";
+                    }
+                }
+                else {
+                    String stres = tv.getText().toString()+"\n= "+res;
+                    //stres = stres+type;
+                    tv.setText(stres);
+                    is_res = true;
+                    type = "";
+                }
             }
         });
         btnminus.setOnClickListener(new Button.OnClickListener(){
