@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         final Animation animAlpha = AnimationUtils.loadAnimation(this, R.anim.alpha);
         TextView tv = (TextView)findViewById(R.id.res_text);
+        Button btnAC = (Button)findViewById(R.id.btclean);
         Button btn1 = (Button)findViewById(R.id.bt1);
         Button btn2 = (Button)findViewById(R.id.bt2);
         Button btn3 = (Button)findViewById(R.id.bt3);
@@ -35,6 +36,13 @@ public class MainActivity extends AppCompatActivity {
         Button btn0 = (Button)findViewById(R.id.bt0);
         Button btnresult = (Button)findViewById(R.id.btresult);
         Button btnminus = (Button)findViewById(R.id.btminus);
+        btnAC.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                v.startAnimation(animAlpha);
+                tv.setText("");
+            }
+        });
         btn1.setOnClickListener(new Button.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -279,11 +287,13 @@ public class MainActivity extends AppCompatActivity {
                 if (res % 1 == 0) {
                     long ires = Math.round(res);
                     if (ires==777){
-                        try {
-                            throw new Exception("Пасхалка)))");
-                        } catch (Exception e) {
-                            throw new RuntimeException(e);
-                        }
+                        String mes = "Пасхалка)))";
+                        String stres = tv.getText().toString()+"\n= "+ires+"\n"+mes;
+                        //stres = stres+type;
+                        tv.setText(stres);
+                        is_res = true;
+                        type = "";
+                        new Thread(() -> to_error(mes)).start();
                     }
                     else {
                         String stres = tv.getText().toString()+"\n= "+ires;
@@ -316,5 +326,14 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+    protected void to_error(String mess){
+        try {
+            String mes = "Пасхалка)))";
+            Thread.sleep(5000);
+            throw new Exception(mes);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }
